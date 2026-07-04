@@ -7,5 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Welcome Message
-        run: echo "Hello from GitHub Actions!"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: List Repository Files
+        run: ls -la
