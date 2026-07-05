@@ -1,36 +1,18 @@
-name: Terraform Pipeline Simulation
+name: Terraform Pipeline
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   fmt:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: hashicorp/setup-terraform@v3
-    
-      - name: Check Terraform Version
-        run: terraform version
-    
-      - name: Print Secret
-        run: echo "My name is ${{ secrets.MY_NAME }}"
 
-  init:
-    needs: fmt
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Running terraform init"
-
-  plan:
-    needs: init
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Running terraform plan"
-
-  apply:
-    needs: plan
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Running terraform apply"
+      - name: Check Terraform Formatting
+        run: terraform fmt -check
