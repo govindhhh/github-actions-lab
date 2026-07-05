@@ -1,6 +1,7 @@
 name: Terraform Pipeline Simulation
 
-on: push
+on:
+  workflow_dispatch:
 
 jobs:
   fmt:
