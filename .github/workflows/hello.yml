@@ -6,14 +6,15 @@ jobs:
   fmt:
     runs-on: ubuntu-latest
     steps:
-    uses: actions/checkout@v4
-    uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@v4
+      
+      - uses: hashicorp/setup-terraform@v3
     
-    name: Check Terraform Version
-    run: terraform version
+      - name: Check Terraform Version
+        run: terraform version
     
-    name: Print Secret
-    run: echo "My name is ${{ secrets.MY_NAME }}"
+      - name: Print Secret
+        run: echo "My name is ${{ secrets.MY_NAME }}"
 
   init:
     needs: fmt
