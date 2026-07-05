@@ -1,21 +1,27 @@
-name: Parallel Jobs Demo
+name: Terraform Pipeline Simulation
 
 on: push
 
 jobs:
-  job1:
+  fmt:
     runs-on: ubuntu-latest
-
     steps:
-      - run: echo "Starting Job 1"
-      - run: sleep 10
-      - run: echo "Finished Job 1"
+      - run: echo "Running terraform fmt"
 
-  job2:
+  init:
+    needs: fmt
     runs-on: ubuntu-latest
-    needs: job1
-
     steps:
-      - run: echo "Starting Job 2"
-      - run: sleep 10
-      - run: echo "Finished Job 2"
+      - run: echo "Running terraform init"
+
+  plan:
+    needs: init
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running terraform plan"
+
+  apply:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running terraform apply"
